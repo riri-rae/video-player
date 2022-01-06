@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, ref } from "react";
 import { Typography } from "@mui/material";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -6,7 +6,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 const TopControl = forwardRef(({
     onBookmark
-}) => {
+}, ref) => {
 
     return (
         <>
@@ -18,8 +18,8 @@ const TopControl = forwardRef(({
                 style={{ padding: 16 }}
             >
                 <Grid item>
-                    <Typography variant="h5" style={{ color: "#99a2b0" }}>
-                        Video Title
+                    <Typography variant="h4" style={{ color: "#99a2b0" }}>
+                        BigBuckBunny
                     </Typography>
                 </Grid>
 

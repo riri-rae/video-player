@@ -14,7 +14,7 @@ import FastForwardIcon from "@mui/icons-material/FastForward";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeDownIcon from "@mui/icons-material/VolumeDown";
-import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import FullScreenIcon from "@mui/icons-material/Fullscreen";
 import { Pause } from "@mui/icons-material";
 
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
         zIndex: 1,
     },
     controlIcons: {
-        color: "#777",
+        color: "#fff",
         fontSize: 50,
         transform: "scale(0.9)",
         "&:hover": {
@@ -41,7 +41,7 @@ const useStyles = makeStyles({
         },
     },
     bottomIcons: {
-        color: "#999",
+        color: "#fff",
         "&:hover": {
             color: "#fff",
         },
@@ -49,15 +49,26 @@ const useStyles = makeStyles({
     volumeSlider: {
         width: 100,
     },
+    boormark: {
+        backgroundColor: "rgba(255,255,255,0.2)",
+        color: "#fff",
+        "&:hover": {
+            color: "#999",
+            backgroundColor: "rgba(255,255,255,0.5)",
+            transition: "all 0.5s ease-out 0s",
+        },
+
+    }
 });
 
 const PrettoSlider = withStyles({
     root: {
         height: 8,
+        color: "#fff"
     },
     thumb: {
-        height: 24,
-        width: 24,
+        height: 20,
+        width: 20,
         backgroundColor: "#fff",
         border: "2px solid currentColor",
         marginTop: -8,
@@ -71,11 +82,11 @@ const PrettoSlider = withStyles({
         left: "calc(-50% + 4px)",
     },
     track: {
-        height: 8,
+        height: 6,
         borderRadius: 4,
     },
     rail: {
-        height: 8,
+        height: 6,
         borderRadius: 4,
     },
 })(Slider);
@@ -137,14 +148,14 @@ const PlayerControls = forwardRef(({
                 container
                 direction="row"
                 alignItems="center"
-                justifyContent="space-between"
+                justifyContent="flex-end"
                 style={{ padding: 16 }}
             >
-                <Grid item>
+                {/* <Grid item>
                     <Typography variant="h5" style={{ color: "#99a2b0" }}>
-                        Video Title
+                        BigBuckBunny
                     </Typography>
-                </Grid>
+                </Grid> */}
 
                 <Grid item style={{ color: "black" }}>
                     <Button
@@ -152,7 +163,7 @@ const PlayerControls = forwardRef(({
                         color="primary"
                         startIcon={<BookmarkBorderIcon />}
                         onClick={onBookmark}
-                        style={{ backgroundColor: "rgba(255,255,255,0.2)", color: "#99a2b0" }}
+                        className={classes.boormark}
                     >
                         Bookmark
                     </Button>
@@ -247,7 +258,7 @@ const PlayerControls = forwardRef(({
                             max={100}
                             value={volume * 100}
                             defaultValue={70}
-                            style={{ color: "#999" }}
+                            style={{ color: "#fff" }}
                             className={classes.bottomIcons}
                             onChange={onVolumeChange}
                             onChangeCommitted={onVolumeSeekUp}
@@ -255,7 +266,7 @@ const PlayerControls = forwardRef(({
                         <Button
                             onClick={onChangeDispayFormat}
                             variant="text"
-                            style={{ color: "#fff", marginLeft: 16 }}
+                            style={{ color: "#fff", marginLeft: 36 }}
                         >
 
                             <Typography>
@@ -270,7 +281,7 @@ const PlayerControls = forwardRef(({
                         variant="text"
                         className={classes.bottomIcons}
                     >
-                        <Typography>{playbackRate}X</Typography>
+                        <Typography>{playbackRate} ✕</Typography>
                     </Button>
                     <Popover
                         id={id}
