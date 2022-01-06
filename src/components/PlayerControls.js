@@ -51,13 +51,12 @@ const useStyles = makeStyles({
     },
     boormark: {
         backgroundColor: "rgba(255,255,255,0.2)",
-        color: "#fff",
+        color: "#999",
         "&:hover": {
-            color: "#999",
+            color: "rgba(0,0,0,0.7)",
             backgroundColor: "rgba(255,255,255,0.5)",
             transition: "all 0.5s ease-out 0s",
         },
-
     }
 });
 
@@ -151,11 +150,6 @@ const PlayerControls = forwardRef(({
                 justifyContent="flex-end"
                 style={{ padding: 16 }}
             >
-                {/* <Grid item>
-                    <Typography variant="h5" style={{ color: "#99a2b0" }}>
-                        BigBuckBunny
-                    </Typography>
-                </Grid> */}
 
                 <Grid item style={{ color: "black" }}>
                     <Button

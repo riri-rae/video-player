@@ -1,22 +1,30 @@
-import React from "react";
-import { AppBar } from "@mui/material";
-import { Toolbar } from "@mui/material";
-import { Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import VideoPlayer from "../src/components/VideoPlayer"
-
+import Header from "./components/Header";
 
 
 function App() {
+  const [scrollNav, setScrollNav] = useState(false);
 
+  const controlNav = () => {
+    if (window.scrollY >= 10) {
+      setScrollNav(true)
+    } else {
+      setScrollNav(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', controlNav)
+
+    return () => {
+      window.removeEventListener('scroll', controlNav)
+    }
+  }, [])
 
   return (
     <>
-      <AppBar position="fixed">
-        <Toolbar>
-          <Typography variant="h6">React Video Player</Typography>
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
+      <Header scrollNav={scrollNav} />
       <VideoPlayer />
     </>
   );

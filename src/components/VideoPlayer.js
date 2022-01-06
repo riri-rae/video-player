@@ -8,11 +8,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import PlayerControls from "./PlayerControls";
 import screenfull from "screenfull";
 import Paper from "@material-ui/core/Paper";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { Box } from "@mui/system";
 
 const VideoTitle = styled.div`
   text-align: center;
   color: #fff;
+  margin-top: 5rem;
+`;
+
+const Hero = styled.div`
+position: relative;
+margin-top: -4.2rem;
+  
 `;
 const PlayerWrapper = styled.div`
   box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.6);
@@ -39,6 +47,12 @@ const MainBackground = styled.div`
 `;
 
 const BookmarkTitle = styled.div`
+display: flex;
+align-items:center;
+    margin-left:8px;
+`;
+
+const BookmarkText = styled.h2`
     margin-left:8px;
 `;
 
@@ -209,7 +223,7 @@ const VideoPlayer = () => {
     };
     return (
         <>
-            <div style={{ position: "relative" }}>
+            <Hero>
                 <MainBackground>
                     <VideoTitle>
                         <h1>Big Buck Bunny</h1>
@@ -262,10 +276,11 @@ const VideoPlayer = () => {
                         </PlayerWrapper>
                     </Container>
                 </MainBackground>
-            </div>
+            </Hero>
             <Container maxWidth="md">
                 <BookmarkTitle>
-                    <h2>Bookmark Collections</h2>
+                    <BookmarkBorderIcon />
+                    <BookmarkText>Bookmark Collections</BookmarkText>
                 </BookmarkTitle>
                 <Grid container style={{ marginTop: 20 }} spacing={3}>
                     {bookmarks.map((bookmark, index) => (
@@ -281,7 +296,7 @@ const VideoPlayer = () => {
                                 }}
                                 elevation={3}
                             >
-                                <Typography variant="body2" align="center">
+                                <Typography variant="body2" align="center" margin="8px" >
                                     Bookmark at {bookmark.display}
                                 </Typography>
                                 <img crossOrigin="anonymous" src={bookmark.image} alt="img" />
