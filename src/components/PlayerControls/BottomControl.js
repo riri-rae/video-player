@@ -8,9 +8,6 @@ import Slider from "@material-ui/core/Slider";
 import Popover from "@mui/material/Popover";
 import { Box } from "@mui/system";
 import IconButton from "@material-ui/core/IconButton";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import FastRewindIcon from "@mui/icons-material/FastRewind";
-import FastForwardIcon from "@mui/icons-material/FastForward";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeDownIcon from "@mui/icons-material/VolumeDown";
@@ -19,18 +16,6 @@ import FullScreenIcon from "@mui/icons-material/Fullscreen";
 import { Pause } from "@mui/icons-material";
 
 const useStyles = makeStyles({
-    controlsWrapper: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        // background: "rgba(0,0,0,0.6)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        zIndex: 1,
-    },
     controlIcons: {
         color: "#777",
         fontSize: 50,
@@ -45,40 +30,8 @@ const useStyles = makeStyles({
         "&:hover": {
             color: "#fff",
         },
-    },
-    volumeSlider: {
-        width: 100,
-    },
+    }
 });
-
-const PrettoSlider = withStyles({
-    root: {
-        height: 8,
-    },
-    thumb: {
-        height: 24,
-        width: 24,
-        backgroundColor: "#fff",
-        border: "2px solid currentColor",
-        marginTop: -8,
-        marginLeft: -12,
-        "&:focus, &:hover, &$active": {
-            boxShadow: "inherit",
-        },
-    },
-    active: {},
-    valueLabel: {
-        left: "calc(-50% + 4px)",
-    },
-    track: {
-        height: 8,
-        borderRadius: 4,
-    },
-    rail: {
-        height: 8,
-        borderRadius: 4,
-    },
-})(Slider);
 
 function ValueLabelComponent(props) {
     const { children, value } = props;
@@ -90,11 +43,9 @@ function ValueLabelComponent(props) {
     );
 }
 
-const PlayerControls = forwardRef(({
+const BottomControl = forwardRef(({
     onPlayPause,
     playing,
-    onRewind,
-    onFastForward,
     muted,
     onMute,
     onVolumeChange,
@@ -111,11 +62,44 @@ const PlayerControls = forwardRef(({
     elapsedTime,
     totalDuration,
     onChangeDispayFormat,
-    onBookmark
-
 }, ref) => {
+
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const open = Boolean(anchorEl);
+    const id = open ? "playbackrate-popover" : undefined;
+
+    const containerRef = useRef(null);
+
+    const PrettoSlider = withStyles({
+        root: {
+            height: 8,
+        },
+        thumb: {
+            height: 24,
+            width: 24,
+            backgroundColor: "#fff",
+            border: "2px solid currentColor",
+            marginTop: -8,
+            marginLeft: -12,
+            "&:focus, &:hover, &$active": {
+                boxShadow: "inherit",
+            },
+        },
+        active: {},
+        valueLabel: {
+            left: "calc(-50% + 4px)",
+        },
+        track: {
+            height: 8,
+            borderRadius: 4,
+        },
+        rail: {
+            height: 8,
+            borderRadius: 4,
+        },
+    })(Slider);
 
 
     const handlePopover = (event) => {
@@ -126,71 +110,10 @@ const PlayerControls = forwardRef(({
         setAnchorEl(null);
     };
 
-    const open = Boolean(anchorEl);
-    const id = open ? "playbackrate-popover" : undefined;
 
-    const containerRef = useRef(null);
 
     return (
-        <div className={classes.controlsWrapper} ref={ref}>
-            <Grid
-                container
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                style={{ padding: 16 }}
-            >
-                <Grid item>
-                    <Typography variant="h5" style={{ color: "#99a2b0" }}>
-                        Video Title
-                    </Typography>
-                </Grid>
-
-                <Grid item style={{ color: "black" }}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        startIcon={<BookmarkBorderIcon />}
-                        onClick={onBookmark}
-                        style={{ backgroundColor: "rgba(255,255,255,0.2)", color: "#99a2b0" }}
-                    >
-                        Bookmark
-                    </Button>
-                </Grid>
-            </Grid>
-
-            {/* middle controls */}
-            <Grid container direaction="row" alignItems="center" justifyContent="center">
-                <IconButton
-                    onClick={onRewind}
-                    className={classes.controlIcons}
-                    aria-label="reqind"
-                >
-                    <FastRewindIcon fontSize="inherit" />
-                </IconButton>
-
-                <IconButton
-                    onClick={onPlayPause}
-                    className={classes.controlIcons}
-                    aria-label="reqind"
-                >
-                    {playing ? (
-                        <Pause fontSize="inherit" />
-                    ) : (
-                        <PlayArrowIcon fontSize="inherit" />
-                    )}
-                </IconButton>
-
-                <IconButton
-                    onClick={onFastForward}
-                    className={classes.controlIcons}
-                    aria-label="reqind"
-                >
-                    <FastForwardIcon fontSize="inherit" />
-                </IconButton>
-            </Grid>
-
-            {/* bottom controls */}
+        <>
             <Grid
                 container
                 direction="row"
@@ -310,8 +233,9 @@ const PlayerControls = forwardRef(({
                     </IconButton>
                 </Grid>
             </Grid>
-        </div>
-    );
+
+        </>
+    )
 });
 
-export default PlayerControls;
+export default BottomControl
