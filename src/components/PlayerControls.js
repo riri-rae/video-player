@@ -25,7 +25,6 @@ const useStyles = makeStyles({
         left: 0,
         right: 0,
         bottom: 0,
-        // background: "rgba(0,0,0,0.6)",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -117,7 +116,6 @@ const PlayerControls = forwardRef(({
     onSeek,
     onSeekMouseDown,
     onSeekMouseUp,
-    // onDuration,
     elapsedTime,
     totalDuration,
     onChangeDispayFormat,
@@ -143,6 +141,7 @@ const PlayerControls = forwardRef(({
 
     return (
         <div className={classes.controlsWrapper} ref={ref}>
+            {/* top controls */}
             <Grid
                 container
                 direction="row"
@@ -166,6 +165,7 @@ const PlayerControls = forwardRef(({
 
             {/* middle controls */}
             <Grid container direaction="row" alignItems="center" justifyContent="center">
+
                 <IconButton
                     onClick={onRewind}
                     className={classes.controlIcons}
@@ -213,7 +213,6 @@ const PlayerControls = forwardRef(({
                         onChange={onSeek}
                         onMouseDown={onSeekMouseDown}
                         onChangeCommitted={onSeekMouseUp}
-                        // onDuration={onDuration}
                         ValueLabelComponent={(props) => (
                             <ValueLabelComponent {...props} value={elapsedTime} />
                         )}

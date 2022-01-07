@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VideoPlayer from "../src/components/VideoPlayer"
 import Header from "./components/Header";
-
+import { videoData } from "./components/data";
 
 function App() {
   const [scrollNav, setScrollNav] = useState(false);
@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       <Header scrollNav={scrollNav} />
-      <VideoPlayer />
+      <VideoPlayer data={videoData} />
     </>
   );
 }

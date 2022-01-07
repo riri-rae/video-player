@@ -2,10 +2,11 @@ import React, { useState, useRef } from "react";
 import { Container } from "@mui/material";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import PlayerControls from "./PlayerControls";
 import screenfull from "screenfull";
 import BookmarkCollection from "./BookmarkCollection";
+import Description from "./Description";
 
 const VideoTitle = styled.div`
   text-align: center;
@@ -41,37 +42,6 @@ const MainBackground = styled.div`
   }
 `;
 
-// const BookmarkTitle = styled.div`
-//   display: flex;
-//   align-items: center;
-//   margin-left: 8px;
-//   padding-top: 3rem;
-//   color: #e5e5e5;
-// `;
-
-// const BookmarkText = styled.h2`
-//   margin-left: 8px;
-//   color: #e5e5e5;
-
-// `;
-
-// const BookmarkWrapper = styled.div`
-//   background-color: rgb(20, 20, 20);
-//   height: 100vh;
-// `;
-
-const useStyles = makeStyles({
-    BookmarkItems: {
-        display: "flex",
-        margin: "6px",
-        cursor: "pointer",
-        "&:hover": {
-            transform: "translateY(-0.5rem)",
-            transition: "all 0.5s ease-out 0s",
-        },
-    },
-});
-
 const format = (seconds) => {
     if (isNaN(seconds)) {
         return `00:00`;
@@ -88,8 +58,8 @@ const format = (seconds) => {
 
 let count = 0;
 
-const VideoPlayer = () => {
-    const classes = useStyles();
+const VideoPlayer = ({ data }) => {
+    const { title, url, description } = data;
     const [state, setState] = useState({
         playing: true,
         muted: true,
@@ -170,10 +140,6 @@ const VideoPlayer = () => {
         playerRef.current.seekTo(newValue / 100, "fraction");
     };
 
-    // const handleDuration = (duration) => {
-    //     setState({ ...state, duration });
-    // };
-
     const addBookmark = () => {
         const canvas = canvasRef.current;
         canvas.width = 160;
@@ -229,7 +195,7 @@ const VideoPlayer = () => {
             <Hero>
                 <MainBackground>
                     <VideoTitle>
-                        <h1>Big Buck Bunny</h1>
+                        <h1>{title}</h1>
                     </VideoTitle>
                     <Container maxWidth="md">
                         <PlayerWrapper
@@ -240,7 +206,7 @@ const VideoPlayer = () => {
                                 ref={playerRef}
                                 width={"100%"}
                                 height="100%"
-                                url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                                url={url}
                                 muted={muted}
                                 playing={playing}
                                 volume={volume}
@@ -283,43 +249,13 @@ const VideoPlayer = () => {
                     </Container>
                 </MainBackground>
             </Hero>
+            <Description description={description} />
             <BookmarkCollection
                 bookmarks={bookmarks}
                 canvasRef={canvasRef}
                 playerRef={playerRef}
                 controlsRef={controlsRef}
             />
-            {/* <BookmarkWrapper>
-                <Container maxWidth="md">
-                    <BookmarkTitle>
-                        <BookmarkBorderIcon />
-                        <BookmarkText>Bookmark Collections</BookmarkText>
-                    </BookmarkTitle>
-                    <Grid container style={{ marginTop: 20 }} spacing={3}>
-                        {bookmarks.map((bookmark, index) => (
-                            <Grid key={index} item className={classes.BookmarkItems}>
-                                <Paper
-                                    onClick={() => {
-                                        playerRef.current.seekTo(bookmark.time);
-                                        controlsRef.current.style.visibility = "visible";
-
-                                        setTimeout(() => {
-                                            controlsRef.current.style.visibility = "hidden";
-                                        }, 1000);
-                                    }}
-                                    elevation={3}
-                                >
-                                    <Typography variant="body2" align="center" margin="8px">
-                                        Bookmark at {bookmark.display}
-                                    </Typography>
-                                    <img crossOrigin="anonymous" src={bookmark.image} alt="img" />
-                                </Paper>
-                            </Grid>
-                        ))}
-                    </Grid>
-                    <canvas ref={canvasRef} />
-                </Container>
-            </BookmarkWrapper> */}
         </>
     );
 };

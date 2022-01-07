@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Toolbar } from "@mui/material";
 import { Typography } from "@mui/material";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ const Navbar = styled.header`
   top: 0;
   width: 100%;
   z-index: 100;
-  background: ${({ scrollNav }) => (scrollNav ? "rgba(0, 0, 0, 0.9)" : 'transparent')};
+  background: ${({ scrollNav }) => (scrollNav ? "rgb(20, 20, 20)" : 'transparent')};
   transition: all 0.5s ease-out;
 `;
 
