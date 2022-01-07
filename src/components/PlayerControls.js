@@ -117,7 +117,7 @@ const PlayerControls = forwardRef(({
     onSeek,
     onSeekMouseDown,
     onSeekMouseUp,
-    onDuration,
+    // onDuration,
     elapsedTime,
     totalDuration,
     onChangeDispayFormat,
@@ -213,7 +213,7 @@ const PlayerControls = forwardRef(({
                         onChange={onSeek}
                         onMouseDown={onSeekMouseDown}
                         onChangeCommitted={onSeekMouseUp}
-                        onDuration={onDuration}
+                        // onDuration={onDuration}
                         ValueLabelComponent={(props) => (
                             <ValueLabelComponent {...props} value={elapsedTime} />
                         )}

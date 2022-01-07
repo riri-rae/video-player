@@ -8,7 +8,7 @@ const Navbar = styled.header`
   top: 0;
   width: 100%;
   z-index: 100;
-  background: ${({ scrollNav }) => (scrollNav ? "rgba(0, 0, 0, 0.8)" : 'transparent')};
+  background: ${({ scrollNav }) => (scrollNav ? "rgba(0, 0, 0, 0.9)" : 'transparent')};
   transition: all 0.5s ease-out;
 `;
 

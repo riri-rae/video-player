@@ -1,15 +1,11 @@
 import React, { useState, useRef } from "react";
-import { Typography } from "@mui/material";
 import { Container } from "@mui/material";
-import { Grid } from "@mui/material";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import PlayerControls from "./PlayerControls";
 import screenfull from "screenfull";
-import Paper from "@material-ui/core/Paper";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import { Box } from "@mui/system";
+import BookmarkCollection from "./BookmarkCollection";
 
 const VideoTitle = styled.div`
   text-align: center;
@@ -18,9 +14,8 @@ const VideoTitle = styled.div`
 `;
 
 const Hero = styled.div`
-position: relative;
-margin-top: -4.2rem;
-  
+  position: relative;
+  margin-top: -6rem;
 `;
 const PlayerWrapper = styled.div`
   box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.6);
@@ -46,16 +41,24 @@ const MainBackground = styled.div`
   }
 `;
 
-const BookmarkTitle = styled.div`
-display: flex;
-align-items:center;
-    margin-left:8px;
-`;
+// const BookmarkTitle = styled.div`
+//   display: flex;
+//   align-items: center;
+//   margin-left: 8px;
+//   padding-top: 3rem;
+//   color: #e5e5e5;
+// `;
 
-const BookmarkText = styled.h2`
-    margin-left:8px;
-`;
+// const BookmarkText = styled.h2`
+//   margin-left: 8px;
+//   color: #e5e5e5;
 
+// `;
+
+// const BookmarkWrapper = styled.div`
+//   background-color: rgb(20, 20, 20);
+//   height: 100vh;
+// `;
 
 const useStyles = makeStyles({
     BookmarkItems: {
@@ -167,9 +170,9 @@ const VideoPlayer = () => {
         playerRef.current.seekTo(newValue / 100, "fraction");
     };
 
-    const handleDuration = (duration) => {
-        setState({ ...state, duration });
-    };
+    // const handleDuration = (duration) => {
+    //     setState({ ...state, duration });
+    // };
 
     const addBookmark = () => {
         const canvas = canvasRef.current;
@@ -229,7 +232,10 @@ const VideoPlayer = () => {
                         <h1>Big Buck Bunny</h1>
                     </VideoTitle>
                     <Container maxWidth="md">
-                        <PlayerWrapper ref={playerContainerRef} onMouseMove={handleMouseMove}>
+                        <PlayerWrapper
+                            ref={playerContainerRef}
+                            onMouseMove={handleMouseMove}
+                        >
                             <ReactPlayer
                                 ref={playerRef}
                                 width={"100%"}
@@ -266,7 +272,7 @@ const VideoPlayer = () => {
                                 onSeek={handleSeekChange}
                                 onSeekMouseDown={handleSeekMouseDown}
                                 onSeekMouseUp={handleSeekMouseUp}
-                                onDuration={handleDuration}
+                                // onDuration={handleDuration}
                                 elapsedTime={elapsedTime}
                                 totalDuration={totalDuration}
                                 onChangeDispayFormat={handleDisplayFormat}
@@ -277,35 +283,43 @@ const VideoPlayer = () => {
                     </Container>
                 </MainBackground>
             </Hero>
-            <Container maxWidth="md">
-                <BookmarkTitle>
-                    <BookmarkBorderIcon />
-                    <BookmarkText>Bookmark Collections</BookmarkText>
-                </BookmarkTitle>
-                <Grid container style={{ marginTop: 20 }} spacing={3}>
-                    {bookmarks.map((bookmark, index) => (
-                        <Grid key={index} item className={classes.BookmarkItems}>
-                            <Paper
-                                onClick={() => {
-                                    playerRef.current.seekTo(bookmark.time);
-                                    controlsRef.current.style.visibility = "visible";
+            <BookmarkCollection
+                bookmarks={bookmarks}
+                canvasRef={canvasRef}
+                playerRef={playerRef}
+                controlsRef={controlsRef}
+            />
+            {/* <BookmarkWrapper>
+                <Container maxWidth="md">
+                    <BookmarkTitle>
+                        <BookmarkBorderIcon />
+                        <BookmarkText>Bookmark Collections</BookmarkText>
+                    </BookmarkTitle>
+                    <Grid container style={{ marginTop: 20 }} spacing={3}>
+                        {bookmarks.map((bookmark, index) => (
+                            <Grid key={index} item className={classes.BookmarkItems}>
+                                <Paper
+                                    onClick={() => {
+                                        playerRef.current.seekTo(bookmark.time);
+                                        controlsRef.current.style.visibility = "visible";
 
-                                    setTimeout(() => {
-                                        controlsRef.current.style.visibility = "hidden";
-                                    }, 1000);
-                                }}
-                                elevation={3}
-                            >
-                                <Typography variant="body2" align="center" margin="8px" >
-                                    Bookmark at {bookmark.display}
-                                </Typography>
-                                <img crossOrigin="anonymous" src={bookmark.image} alt="img" />
-                            </Paper>
-                        </Grid>
-                    ))}
-                </Grid>
-                <canvas ref={canvasRef} />
-            </Container>
+                                        setTimeout(() => {
+                                            controlsRef.current.style.visibility = "hidden";
+                                        }, 1000);
+                                    }}
+                                    elevation={3}
+                                >
+                                    <Typography variant="body2" align="center" margin="8px">
+                                        Bookmark at {bookmark.display}
+                                    </Typography>
+                                    <img crossOrigin="anonymous" src={bookmark.image} alt="img" />
+                                </Paper>
+                            </Grid>
+                        ))}
+                    </Grid>
+                    <canvas ref={canvasRef} />
+                </Container>
+            </BookmarkWrapper> */}
         </>
     );
 };
