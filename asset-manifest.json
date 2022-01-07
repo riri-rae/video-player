@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/video-player/static/js/main.0699bf16.js",
+    "static/js/787.d2fa18f8.chunk.js": "/video-player/static/js/787.d2fa18f8.chunk.js",
+    "index.html": "/video-player/index.html",
+    "main.0699bf16.js.map": "/video-player/static/js/main.0699bf16.js.map",
+    "787.d2fa18f8.chunk.js.map": "/video-player/static/js/787.d2fa18f8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.0699bf16.js"
+  ]
+}
