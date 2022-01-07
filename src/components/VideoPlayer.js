@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { Container } from "@mui/material";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
-// import { makeStyles } from "@material-ui/core/styles";
 import PlayerControls from "./PlayerControls";
 import screenfull from "screenfull";
 import BookmarkCollection from "./BookmarkCollection";
@@ -96,7 +95,6 @@ const VideoPlayer = ({ data }) => {
         setState({ ...state, seeking: false, volume: parseFloat(newValue / 100) });
     };
     const handleVolumeChange = (e, newValue) => {
-        // console.log(newValue);
         setState({
             ...state,
             volume: parseFloat(newValue / 100),
@@ -238,7 +236,6 @@ const VideoPlayer = ({ data }) => {
                                 onSeek={handleSeekChange}
                                 onSeekMouseDown={handleSeekMouseDown}
                                 onSeekMouseUp={handleSeekMouseUp}
-                                // onDuration={handleDuration}
                                 elapsedTime={elapsedTime}
                                 totalDuration={totalDuration}
                                 onChangeDispayFormat={handleDisplayFormat}
