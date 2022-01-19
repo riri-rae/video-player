@@ -38,7 +38,7 @@ const MainBackground = styled.div`
     height: 100%;
     background-size: cover;
     filter: blur(5px);
-    background-image: url(./images/Big.Buck.Bunny.-.Opening.Screen.png);
+    background-image: url("./images/BigBuckBunny-background.png");
   }
 `;
 
@@ -62,7 +62,7 @@ const VideoPlayer = ({ data }) => {
     const { title, url, description } = data;
     const [state, setState] = useState({
         playing: true,
-        muted: true,
+        muted: false,
         played: 0,
         playbackRate: 1.0,
         volume: 1,
@@ -131,6 +131,10 @@ const VideoPlayer = ({ data }) => {
 
     const handleSeekMouseDown = (e) => {
         setState({ ...state, seeking: true });
+    };
+
+    const handleDuration = (duration) => {
+        setState({ ...state, duration });
     };
 
     const handleSeekMouseUp = (e, newValue) => {
@@ -238,7 +242,7 @@ const VideoPlayer = ({ data }) => {
                                 onSeek={handleSeekChange}
                                 onSeekMouseDown={handleSeekMouseDown}
                                 onSeekMouseUp={handleSeekMouseUp}
-                                // onDuration={handleDuration}
+                                onDuration={handleDuration}
                                 elapsedTime={elapsedTime}
                                 totalDuration={totalDuration}
                                 onChangeDispayFormat={handleDisplayFormat}
